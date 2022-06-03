@@ -1,6 +1,6 @@
 
 import tkinter as tk
-from tkinter import Frame,Label,Button
+from tkinter import Frame,Label,Button,Entry
 # import conector
 # from conector import conector
 
@@ -26,18 +26,21 @@ class Comprador():
 #---------------------------creacion del marco---------------------------#
 
                 marco = Frame(root2)
-                marco.pack(side="top",fill="x")
+                marco.place(relx=0.1, rely=0.1, relwidth=0.8,relheight=0.8)
                 marco.config(bg="blue",width=800,height=800)
 
 #---------------------------creacion ventana---------------------------#
 
                 ventana_ppal3 =Label(marco,text="BIENVENIDO COMPRADOR",font=("Comic Sans MS",40),fg="GREEN")
-                ventana_ppal3.place(x=500,y=0)
+                ventana_ppal3.grid(row=0,column=1)
 
 #---------------------------creacion botones---------------------------#
 
                 boton1=Button(marco,text="¿quieres volver?",command=lambda:vuelvo(),width=47)
-                boton1.place(x=250,y=250)
+                boton1.grid(row=2,column=0)
+
+#---------------------------creacion entradas---------------------------#
+#por ahora lo dejo vacio porque no sé si lo voy a usar
 
                 root2.mainloop()
 
