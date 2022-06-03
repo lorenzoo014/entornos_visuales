@@ -1,14 +1,29 @@
 
 # import tkinter as tk
 from msilib.schema import Font
-from tkinter import Tk,GROOVE, Frame,Label,Button,Entry,Canvas,font
+from tkinter import Tk, Frame,Label,Button,Entry,Canvas,font,W,E
+import psycopg2
 class Vendedor:
     def __init__(self):
         print("se ha pulsado el boton vender")
 
     def VentanaNueva2(self):
+        #---------------------------creacion de funciones---------------------------#
         def vuelvo():
             root3.destroy()
+        def guarda_dato(nombre,apellido,nft):                                       #para que los vendedores coloquen sus anuncios
+            conn= psycopg2.connect(
+                host ="ec2-54-211-255-161.compute-1.amazonaws.com",
+                database="dfese1r3fhpnbb",
+                user= "ketdxgwirslzzx",
+                password="5db9c6dec51f126c19693415abaaf635a36b326f20ea14ca0dcd4a27b6fa1d4f",
+                port="5432"
+            )
+            cursor = conn.cursor()
+            query = '''INSERT INTO users(nombre,apellido,nft) VALUES (&s,&s,&s)'''
+            cursor.execute(query,(nombre,apellido,nft))
+            conn.commit()
+            conn.close()
         print("quiero vender")
         root3=Tk()
         root3.title("VENDEDOR")
@@ -52,8 +67,11 @@ class Vendedor:
 
 # ---------------------------creacion boton---------------------------#
 
-        boton1=Button(marco,text="¿quieres volver?",command=lambda: vuelvo(),width=47)
-        boton1.config(row=4,column=2)
+        boton1=Button(marco,text="¿quieres salir?",command=lambda:vuelvo())
+        boton1.grid(row=5,column=1,sticky=W+E)
+
+        boton2=Button(marco,text="poner en el mercado", command=lambda:guarda_dato(entrada1.get(),entrada2.get(),entrada3.get()))
+        boton2.grid(row=4,column=1,sticky=W+E)
 
         root3.mainloop()
 
