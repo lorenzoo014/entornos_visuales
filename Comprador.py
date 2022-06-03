@@ -11,35 +11,35 @@ from tkinter import Frame,Label,Button
 
 class Comprador():
 #---------------------------metodos de la clase---------------------------#
-    def __init__(self):
-        print("se ha pulsado el boton comprar")
+        def __init__(self):
+                print("se ha pulsado el boton comprar")
 
-    def VentanaNueva(self):
-        def vuelvo():                                                        #tras estar mucho pensandolo e intentado que este metodo devolviese a la ventana original pero no he sido capaz
-                                                                                #de averiguar cómo
-            root2.destroy()
-        print("quiero comprar")
-        root2=tk.Tk()
-        root2.title("COMPRADOR")
+        def VentanaNueva(self):
+                def vuelvo():
+                        root2.destroy()
+                root2 = tk.Tk()                                            #tras estar mucho pensandolo e intentado que este metodo devolviese a la ventana original pero no he sido capaz de averiguar cómo
+                print("quiero comprar")
+
+                root2.title("COMPRADOR")
 
 
 #---------------------------creacion del marco---------------------------#
 
-        marco = Frame(root2)
-        marco.pack(side="top",fill="x")
-        marco.config(bg="blue",width=800,height=800)
+                marco = Frame(root2)
+                marco.pack(side="top",fill="x")
+                marco.config(bg="blue",width=800,height=800)
 
 #---------------------------creacion ventana---------------------------#
 
-        ventana_ppal3 =Label(marco,text="BIENVENIDO COMPRADOR",font=("Comic Sans MS",40),fg="GREEN")
-        ventana_ppal3.place(x=500,y=0)
+                ventana_ppal3 =Label(marco,text="BIENVENIDO COMPRADOR",font=("Comic Sans MS",40),fg="GREEN")
+                ventana_ppal3.place(x=500,y=0)
 
 #---------------------------creacion botones---------------------------#
 
-        boton1=Button(marco,text="¿quieres volver?",command=lambda: vuelvo(),width=47)
-        boton1.place(x=250,y=250)
+                boton1=Button(marco,text="¿quieres volver?",command=lambda:vuelvo(),width=47)
+                boton1.place(x=250,y=250)
 
-        root2.mainloop()
+                root2.mainloop()
 
 
 
