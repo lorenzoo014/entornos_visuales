@@ -1,7 +1,8 @@
 
 from msilib.schema import Font
 from tkinter import Tk, Frame,Label,Button,Entry,Canvas,font,W,E
-from venv import psycopg2                                                     #esta opcion me vale para resolver el problema pero deberia bastar con la sentencia "import psycopg2"-->evidentemente despues de haber instalado el psycopg2 en el entorno (venv)
+from env import psycopg2                                                     #esta opcion me vale para resolver el problema pero deberia bastar con la sentencia "import psycopg2"-->evidentemente despues de haber instalado el psycopg2 en el entorno (venv)
+
 
 class Vendedor:
         def __init__(self):
