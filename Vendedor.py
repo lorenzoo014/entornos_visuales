@@ -1,12 +1,15 @@
 
+
 from msilib.schema import Font
 from tkinter import Tk, Frame,Label,Button,Entry,Canvas,font,W,E
-from env import psycopg2                                                     #esta opcion me vale para resolver el problema pero deberia bastar con la sentencia "import psycopg2"-->evidentemente despues de haber instalado el psycopg2 en el entorno (venv)
-
-
+# from venv import psycopg2
+import psycopg2                                                    #aparece en la seccion "problemas" que no se puede encontrar el modulo del cual se importa pero esto se produce porque el programa no puede tener en cuenta que
+#                                                                  #yo lo estoy ejecutando sobre el entorno virtual "env"(importado por mi) en el cual SÍ esta importado el módulo PSYCOPG2 por eso no hay luego fallos porque en ese entorno SÍ esta importado
 class Vendedor:
-        def __init__(self):
+        def __init__(self,contador=0):
                 print("se ha pulsado el boton vender")
+                self.contador = contador
+                # print(contador)
 
         def VentanaNueva2(self):
         #---------------------------creacion de funciones---------------------------#
@@ -15,18 +18,24 @@ class Vendedor:
                         # en el flujo de ejecucion ya estará creado
 
                 def guarda_dato(nombre,apellido,nft):                                       #para que los vendedores coloquen sus anuncios
-                        conn= psycopg2.connect(
-                                host ="ec2-54-211-255-161.compute-1.amazonaws.com",
-                                database="dfese1r3fhpnbb",
-                                user= "ketdxgwirslzzx",
-                                password="5db9c6dec51f126c19693415abaaf635a36b326f20ea14ca0dcd4a27b6fa1d4f",
+                        self.contador += 1                                               #variable contador para ver cuantas veces se han publicado anuncios
+                        print(self.contador)
+                        conn = psycopg2.connect(
+                                host ="ec2-23-23-182-238.compute-1.amazonaws.com",
+                                database="d8jkpbdn8n5tau",
+                                user= "sfgectibhzlelp",
+                                password="e30184e8472a143402057f1b68c02afac1e0ffd8b3c504783772a6362b67fe3c",
                                 port="5432"
-        )
+                                )
                         cursor = conn.cursor()
-                        query = '''INSERT INTO users(nombre,apellido,nft) VALUES (&s,&s,&s)'''
+                        query = '''INSERT INTO tabla_contador(nombre,apellido,nft) VALUES (%s,%s,%s)'''
                         cursor.execute(query,(nombre,apellido,nft))
                         conn.commit()
                         conn.close()
+                        #-------pequeña comprobacion de que la signatura y los parametros se enlazan correctamente----------#
+                        print(nombre)
+                        print(apellido)
+                        print(nft)
         ##---------------------------fin de funciones---------------------------#
                 root3=Tk()
                 print("quiero vender")
@@ -41,7 +50,6 @@ class Vendedor:
 # #---------------------------creacion del marco---------------------------#
 
                 marco = Frame()
-                '''marco.place(relx=0.1, rely=0.1, relwidth=0.8,relheight=0.8)'''
                 marco.place(relx=0.1, rely=0.1, relwidth=0.8,relheight=0.8)
                 # marco.config(width=500,height=500,relief=GROOVE)
 
@@ -75,9 +83,10 @@ class Vendedor:
                 boton1=Button(marco,text="¿quieres salir?",command=lambda:vuelvo())
                 boton1.grid(row=5,column=1,sticky=W+E)
 
-                boton2=Button(marco,text="poner en el mercado")
-                ''' ,command=lambda:guarda_dato(entrada1.get(),entrada2.get(),entrada3.get()))'''#esto se supone que iria arriba
+                boton2=Button(marco,text="poner en el mercado",command=lambda:guarda_dato(
+                        entrada1.get(),
+                        entrada2.get(),
+                        entrada3.get())
+                        )
                 boton2.grid(row=4,column=1,sticky=W+E)
-
                 root3.mainloop()
-
