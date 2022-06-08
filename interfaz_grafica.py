@@ -15,6 +15,7 @@ a=0
 #---------------------------funciones---------------------------#
 def cambiapágina(a):
     if a==1:
+        print("cambio")
         root1.destroy()
         comprador1 =Comprador()
         comprador1.VentanaNueva()
