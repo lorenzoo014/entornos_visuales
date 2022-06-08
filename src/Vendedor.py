@@ -2,7 +2,7 @@
 # import tkinter as tk
 from msilib.schema import Font
 from tkinter import Tk, Frame,Label,Button,Entry,Canvas,font,W,E
-import psycopg2
+# import psycopg2
 class Vendedor:
         def __init__(self):
                 print("se ha pulsado el boton vender")
@@ -13,20 +13,19 @@ class Vendedor:
                         root3.destroy()                                                    # debido a  que es una funcion da igual utilizar objetos no creados(root) porque
                         # en el flujo de ejecucion ya estará creado
 
-                def guarda_dato(nombre,apellido,nft):                                       #para que los vendedores coloquen sus anuncios
-                        conn= psycopg2.connect(
-                                host ="ec2-54-211-255-161.compute-1.amazonaws.com",
-                                database="dfese1r3fhpnbb",
-                                user= "ketdxgwirslzzx",
-                                password="5db9c6dec51f126c19693415abaaf635a36b326f20ea14ca0dcd4a27b6fa1d4f",
-                                port="5432"
-        )
-                        cursor = conn.cursor()
-                        query = '''INSERT INTO users(nombre,apellido,nft) VALUES (&s,&s,&s)'''
-                        cursor.execute(query,(nombre,apellido,nft))
-                        conn.commit()
-                        conn.close()
-        ##---------------------------fin de funciones---------------------------#
+        # def guarda_dato(nombre,apellido,nft):                                       #para que los vendedores coloquen sus anuncios
+        # conn= psycopg2.connect(
+        #     host ="ec2-54-211-255-161.compute-1.amazonaws.com",
+        #     database="dfese1r3fhpnbb",
+        #     user= "ketdxgwirslzzx",
+        #     password="5db9c6dec51f126c19693415abaaf635a36b326f20ea14ca0dcd4a27b6fa1d4f",
+        #     port="5432"
+        # )
+        # cursor = conn.cursor()
+        # query = '''INSERT INTO users(nombre,apellido,nft) VALUES (&s,&s,&s)'''
+        # cursor.execute(query,(nombre,apellido,nft))
+        # conn.commit()
+        # conn.close()
                 root3=Tk()
                 print("quiero vender")
                 root3.title("VENDEDOR")

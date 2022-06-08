@@ -1,8 +1,9 @@
 import tkinter as tk
 from tkinter import Frame,Label,Button
-
-from src.Comprador import Comprador
-from src.Vendedor import Vendedor                #me importo la clase Vendedor del modulo Vendedor
+import Comprador
+from Comprador import Comprador
+import Vendedor                                 #me importo el modulo vendedor
+from Vendedor import Vendedor                   #me importo la clase Vendedor del modulo Vendedor
 
 
 
