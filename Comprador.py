@@ -1,6 +1,6 @@
 
 import tkinter as tk
-from tkinter import Frame,Label,Button,Entry
+from tkinter import E, END, Frame,Label,Button,Entry,Listbox,W
 # import conector
 # from conector import conector
 
@@ -8,15 +8,40 @@ from tkinter import Frame,Label,Button,Entry
 # import interfaz_grafica                                       #me importo el modulo interfaz_grafica
 #                                                             #me importo la clase interfaz_grafica del modulo interfaz_grafica
 
+import psycopg2
+
 
 class Comprador():
 #---------------------------metodos de la clase---------------------------#
         def __init__(self):
                 print("se ha pulsado el boton comprar")
 
+
         def VentanaNueva(self):
+                #---------------metodos de la clase ventana nueva------------#
                 def vuelvo():
                         root2.destroy()
+                def mostrar():
+                        conn = psycopg2.connect(
+                                host ="ec2-23-23-182-238.compute-1.amazonaws.com",
+                                database="d8jkpbdn8n5tau",
+                                user= "sfgectibhzlelp",
+                                password="e30184e8472a143402057f1b68c02afac1e0ffd8b3c504783772a6362b67fe3c",
+                                port="5432"
+                                )
+                        cursor = conn.cursor()
+                        query = '''SELECT * FROM tabla_contador'''
+                        cursor.execute(query)
+                        guardar = cursor.fetchall()
+                        caja = Listbox(marco, width=20, height=5)
+                        caja.grid(row=5, columnspan=4,sticky=W+E)                   #el cloumnspan sirve para que le de espacio a los lados
+                        for elemento in guardar:
+                                caja.insert(END, elemento)
+                        conn.commit()
+                        conn.close()
+
+
+
                 root2 = tk.Tk()                                            #tras estar mucho pensandolo e intentado que este metodo devolviese a la ventana original pero no he sido capaz de averiguar cómo
                 print("quiero comprar")
 
@@ -41,6 +66,8 @@ class Comprador():
 
 #---------------------------creacion entradas---------------------------#
 #por ahora lo dejo vacio porque no sé si lo voy a usar
+
+                mostrar()
 
                 root2.mainloop()
 

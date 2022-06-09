@@ -6,7 +6,7 @@ from Comprador import Comprador                       #me importo la clase compr
 
 import Vendedor                              #me importo el modulo vendedor
 from Vendedor import Vendedor                #me importo la clase Vendedor del modulo Vendedor
-
+import psycopg2
 
 
 root1 =tk.Tk()
@@ -52,6 +52,25 @@ boton1.place(x=150,y=270)
 
 boton2=Button(marco2,text="¿quieres vender?",command=lambda: cambiapágina(2),width=41)
 boton2.place(x=950,y=270)
+
+
+#---------creacion de las tablas-------------#
+conn = psycopg2.connect(
+    host ="ec2-23-23-182-238.compute-1.amazonaws.com",
+    database="d8jkpbdn8n5tau",
+    user= "sfgectibhzlelp",
+    password="e30184e8472a143402057f1b68c02afac1e0ffd8b3c504783772a6362b67fe3c",
+    port="5432"
+    )
+# conn.database()
+cursor = conn.cursor()
+# query1= "SHOW TABLES"
+# cursor.execute(query1)
+query = '''CREATE TABLE IF NOT EXISTS tabla_contador (id SERIAL PRIMARY KEY, nombre TEXT,apellido TEXT,nft TEXT ,riesgo TEXT);'''
+cursor.execute(query)
+conn.commit()
+conn.close()
+print("se ha creado el registro")
 
 
 root1.mainloop()
