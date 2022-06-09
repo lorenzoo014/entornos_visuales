@@ -34,7 +34,7 @@ class Comprador():
                         cursor.execute(query)
                         guardar = cursor.fetchall()
                         caja = Listbox(marco, width=20, height=5)
-                        caja.grid(row=5, columnspan=4,sticky=W+E)                   #el cloumnspan sirve para que le de espacio a los lados
+                        caja.grid(row=1, columnspan=10,sticky=W+E)                   #el cloumnspan sirve para que le de espacio a los lados
                         for elemento in guardar:
                                 caja.insert(END, elemento)
                         conn.commit()
