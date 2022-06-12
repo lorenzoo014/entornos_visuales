@@ -4,7 +4,7 @@ from tkinter import Frame,Label,Button
 import Comprador                                      #me importo el modulo comprador
 from Comprador import Comprador                       #me importo la clase comprador
 
-import Vendedor                              #me importo el modulo vendedor
+import Vendedor                              #me importo el modulo vendedor f
 from Vendedor import Vendedor                #me importo la clase Vendedor del modulo Vendedor
 import psycopg2
 

@@ -4,7 +4,7 @@ from msilib.schema import Font
 from tkinter import Tk, Frame,Label,Button,Entry,Canvas,font,W,E
 # from venv import psycopg2
 import psycopg2                                                    #aparece en la seccion "problemas" que no se puede encontrar el modulo del cual se importa pero esto se produce porque el programa no puede tener en cuenta que
-#                                                                  #yo lo estoy ejecutando sobre el entorno virtual "env"(importado por mi) en el cual SÍ esta importado el módulo PSYCOPG2 por eso no hay luego fallos porque en ese entorno SÍ esta importado
+#      f                                                            #yo lo estoy ejecutando sobre el entorno virtual "env"(importado por mi) en el cual SÍ esta importado el módulo PSYCOPG2 por eso no hay luego fallos porque en ese entorno SÍ esta importado
 class Vendedor:
         def __init__(self,contador=0):
                 print("se ha pulsado el boton vender")
