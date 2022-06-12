@@ -8,6 +8,8 @@ from tkinter import E, END, Frame,Label,Button,Entry,Listbox,W
 # import interfaz_grafica                                       #me importo el modulo interfaz_grafica
 #                                                             #me importo la clase interfaz_grafica del modulo interfaz_grafica
 
+# esto solo va a servir para asegurarme guardar el github debido a que voy a hacer cambios sustanciales con el thread
+
 import psycopg2
 
 
