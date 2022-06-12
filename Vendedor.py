@@ -1,20 +1,24 @@
 
+import threading
+import time
 
 from msilib.schema import Font
 from tkinter import Tk, Frame,Label,Button,Entry,Canvas,font,W,E
 # from venv import psycopg2
-import psycopg2                                                    #aparece en la seccion "problemas" que no se puede encontrar el modulo del cual se importa pero esto se produce porque el programa no puede tener en cuenta que
-#      f                                                            #yo lo estoy ejecutando sobre el entorno virtual "env"(importado por mi) en el cual SÍ esta importado el módulo PSYCOPG2 por eso no hay luego fallos porque en ese entorno SÍ esta importado
-class Vendedor:
-        def __init__(self,contador=0):
-                print("se ha pulsado el boton vender")
-                self.contador = contador
-                # print(contador)
+import psycopg2
 
-        def VentanaNueva2(self):
+                                                #aparece en la seccion "problemas" que no se puede encontrar el modulo del cual se importa pero esto se produce porque el programa no puede tener en cuenta que
+#      f                                                            #yo lo estoy ejecutando sobre el entorno virtual "env"(importado por mi) en el cual SÍ esta importado el módulo PSYCOPG2 por eso no hay luego fallos porque en ese entorno SÍ esta importado
+class Vendedor(threading.Thread):
+        def __init__(self):
+                print("se ha pulsado el boton vender")
+                super().__init__()
+                self.bloqueo2 = threading.Lock()
+                # print(contador)
+        def run(self):
         #---------------------------creacion de funciones---------------------------#
                 def vuelvo():
-                        root3.destroy()                                                    # debido a  que es una funcion da igual utilizar objetos no creados(root) porque
+                        self.bloqueo2.acquire()                                                # debido a  que es una funcion da igual utilizar objetos no creados(root) porque
                         # en el flujo de ejecucion ya estará creado
 
                 def guarda_dato(nombre,apellido,nft):                                       #para que los vendedores coloquen sus anuncios
@@ -37,6 +41,7 @@ class Vendedor:
                         print(apellido)
                         print(nft)
         ##---------------------------fin de funciones---------------------------#
+                self.bloqueo2.acquire()
                 root3=Tk()
                 print("quiero vender")
                 root3.title("VENDEDOR")
@@ -89,4 +94,8 @@ class Vendedor:
                         entrada3.get())
                         )
                 boton2.grid(row=4,column=1,sticky=W+E)
+                #tiempo a dormir
+
+                time.sleep(3)
+
                 root3.mainloop()

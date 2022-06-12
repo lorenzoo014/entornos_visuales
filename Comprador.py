@@ -1,6 +1,10 @@
 
 import tkinter as tk
 from tkinter import E, END, Frame,Label,Button,Entry,Listbox,W
+
+
+import threading
+import time
 # import conector
 # from conector import conector
 
@@ -13,16 +17,19 @@ from tkinter import E, END, Frame,Label,Button,Entry,Listbox,W
 import psycopg2
 
 
-class Comprador():
+
+class Comprador(threading.Thread):
 #---------------------------metodos de la clase---------------------------#
         def __init__(self):
                 print("se ha pulsado el boton comprar")
+                super().__init__()
+                self.bloqueo1 = threading.Lock()
 
 
-        def VentanaNueva(self):
+        def run(self):
                 #---------------metodos de la clase ventana nueva------------#
                 def vuelvo():
-                        root2.destroy()
+                        self.bloqueo1.acquire()
                 def mostrar():
                         conn = psycopg2.connect(
                                 host ="ec2-23-23-182-238.compute-1.amazonaws.com",
@@ -43,7 +50,7 @@ class Comprador():
                         conn.close()
 
 
-
+                self.bloqueo1.acquire()
                 root2 = tk.Tk()                                            #tras estar mucho pensandolo e intentado que este metodo devolviese a la ventana original pero no he sido capaz de averiguar cómo
                 print("quiero comprar")
 
@@ -70,7 +77,10 @@ class Comprador():
 #por ahora lo dejo vacio porque no sé si lo voy a usar
 
                 mostrar()
+                time.sleep(3)
 
+
+#crear una tercera clase alternativa para guardar ahi los threads a ver qué pasa
                 root2.mainloop()
 
 
