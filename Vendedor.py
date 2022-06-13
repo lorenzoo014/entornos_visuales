@@ -129,11 +129,11 @@ class Vendedor:
                 #         pass
 
                 def guarda_dato(nombre,apellido,nft):                                       #para que los vendedores coloquen sus anuncios
-                        conn= psycopg2.connect(
-                                host ="ec2-54-211-255-161.compute-1.amazonaws.com",
-                                database="dfese1r3fhpnbb",
-                                user= "ketdxgwirslzzx",
-                                password="5db9c6dec51f126c19693415abaaf635a36b326f20ea14ca0dcd4a27b6fa1d4f",
+                        # conn= psycopg2.connect(
+                        #         host ="ec2-54-211-255-161.compute-1.amazonaws.com",
+                        #         database="dfese1r3fhpnbb",
+                        #         user= "ketdxgwirslzzx",
+                        #         password="5db9c6dec51f126c19693415abaaf635a36b326f20ea14ca0dcd4a27b6fa1d4f",
                         # self.contador += 1                                               #variable contador para ver cuantas veces se han publicado anuncios
                         # print(self.contador)
                         conn = psycopg2.connect(
@@ -142,7 +142,6 @@ class Vendedor:
                                 user= "sfgectibhzlelp",
                                 password="e30184e8472a143402057f1b68c02afac1e0ffd8b3c504783772a6362b67fe3c",
                                 port="5432"
-        )
                                 )
                         cursor = conn.cursor()
                         query = '''INSERT INTO users(nombre,apellido,nft) VALUES (&s,&s,&s)'''
