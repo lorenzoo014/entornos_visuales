@@ -134,8 +134,8 @@ import psycopg2
 
 root1 =tk.Tk()
 root1.title("NFT´S")
-root1.minsize(height=2000,width=2000)
-root1.maxsize(height=2000,width=2000)
+root1.minsize(height=1900,width=1900)
+root1.maxsize(height=1900,width=1900)
 global a                                           #me creo una variable global inicializada a 0 que luego será de uso en las funciones
 a=0
 #---------------------------funciones---------------------------#

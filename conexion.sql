@@ -7,4 +7,6 @@ INSERT INTO users(nombre,apellido,nft,riesgo) VALUES
 INSERT INTO users(nombre,apellido,nft,riesgo) VALUES
     ('manolo', 'bombo','escudo_de_españa','bajo');
 
+DROP TABLE users()
+
 SELECT * FROM users;

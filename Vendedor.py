@@ -144,7 +144,7 @@ class Vendedor:
                                 port="5432"
                                 )
                         cursor = conn.cursor()
-                        query = '''INSERT INTO users(nombre,apellido,nft) VALUES (&s,&s,&s)'''
+                        # query = '''INSERT INTO users(nombre,apellido,nft) VALUES (&s,&s,&s)'''
                         query = '''INSERT INTO tabla_contador(nombre,apellido,nft) VALUES (%s,%s,%s)'''
                         cursor.execute(query,(nombre,apellido,nft))
                         conn.commit()
