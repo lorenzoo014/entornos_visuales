@@ -115,6 +115,8 @@ from tkinter import E, END, Frame,Label,Button,Entry,Listbox,W,Canvas
 #         cadena2 =cadena[0:]
 #         return cadena2
 
+# def Interesa(nft,cliente):
+#         pass                   la funcion Interesa(nft,cliente) tal y como he planteado el programa no es necesaria ya que es el propio usuario el que de motu propio indica si le interesa o no
 class Comprador():
 #---------------------------metodos de la clase---------------------------#
         def __init__(self):
@@ -123,7 +125,7 @@ class Comprador():
                 #---------------metodos de la clase ventana nueva------------#
                 # def vuelvo():
                 #         root2.destroy()
-                def mostrar(riesgo2):
+                def mostrar(riesgo2=" "):
                         print(riesgo2)
                         conn = psycopg2.connect(
                                 host ="ec2-23-23-182-238.compute-1.amazonaws.com",
@@ -138,14 +140,41 @@ class Comprador():
                                 query = '''SELECT * FROM tabla_contador WHERE riesgo= 'bajo' '''
                         elif riesgo2 =="medio":
                                 query = '''SELECT * FROM tabla_contador WHERE riesgo= 'medio' '''
-                        else:
+                        elif riesgo2 =="alto":
                                 query = '''SELECT * FROM tabla_contador WHERE riesgo= 'alto' '''
+                        else:
+                                query = '''SELECT * FROM tabla_contador '''
                         cursor.execute(query)
                         guardar = cursor.fetchall()
                         caja = Listbox(marco, width=20, height=5)
                         caja.grid(row=2, columnspan=10,sticky=W+E)                   #el cloumnspan sirve para que le de espacio a los lados
                         for elemento in guardar:
                                 caja.insert(END, elemento)
+                        conn.commit()
+                        conn.close()
+
+
+                def comprar(id):
+                        conn = psycopg2.connect(
+                                host ="ec2-23-23-182-238.compute-1.amazonaws.com",
+                                database="d8jkpbdn8n5tau",
+                                user= "sfgectibhzlelp",
+                                password="e30184e8472a143402057f1b68c02afac1e0ffd8b3c504783772a6362b67fe3c",
+                                port="5432"
+                                )
+                        cursor = conn.cursor()
+                        # query = "SELECT * FROM tabla_contador WHERE id = ?"
+                        # variable = int(id)
+                        # cursor.execute(query, str(id))
+
+                        query2 = "DELETE FROM tabla_contador WHERE id = ?"
+                        cursor.execute(query2, str(id))
+                        # mostrar()
+                        ventana_emergente = Label(marco,text="Enhorabuena ha comprado el NFT numero"+str(id))
+                        ventana_emergente.grid(row=4,column=1)
+
+
+
                         conn.commit()
                         conn.close()
                 # root2 = tk.Tk()                                            #tras estar mucho pensandolo e intentado que este metodo devolviese a la ventana original pero no he sido capaz de averiguar cómo
@@ -159,14 +188,20 @@ class Comprador():
                 ventana_ppal3.grid(row=0,column=1)
                 ventana_texto=Label(marco, text="¿qué nivel de riesgo está dispuesto a asumir?-->(bajo,medio,alto)")
                 ventana_texto.grid(row=1,column=0)
+                ventana_compra = Label(marco,text="introduzca el numero del NFT que le interese")
+                ventana_compra.grid(row=3,column=0)
 #---------------------------creacion botones---------------------------#
                 boton1=Button(marco,text="¿quieres volver?",command= callback)
-                boton1.grid(row=3,column=0)
+                boton1.grid(row=5,column=0)
                 boton2 = Button(marco, text="buscar",command=lambda:mostrar(entrada1.get()))
-                boton2.grid(row=1,column=3)
+                boton2.grid(row=1,column=2)
+                boton3 = Button(marco,text="comprar", command=lambda:comprar(entrada_compra.get()))
+                boton3.grid(row=3,column=2)
 #---------------------------creacion entradas---------------------------#
                 entrada1= Entry(marco)
                 entrada1.grid(row=1,column=1)
+                entrada_compra =Entry(marco)
+                entrada_compra.grid(row=3,column=1)
 #por ahora lo dejo vacio porque no sé si lo voy a usar
 
                 #root.mainloop()
@@ -180,3 +215,27 @@ class Comprador():
 
 
 #command=lambda:threading.Thread(vuelvo()).start()
+
+
+
+
+
+
+                        # guardar = cursor.fetchall()
+                        # for elemento in guardar:
+                        #         if elemento[0] == id:
+                        #                 return elemento
+                        #         else:
+                        # #                 pass
+
+
+                        #                         objeto = cursor.fetchone()
+                        # contador =1
+                        # print(id)
+                        # while objeto is not None:
+                        #         print(contador)
+                        #         if contador == int(id):
+                        #                 break
+                        #         else:
+                        #                 contador+=1
+                        #                 objeto = cursor.fetchone()    -->util para buscar un onjeto determinado--> encontrada una forma mejor
