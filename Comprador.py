@@ -111,7 +111,9 @@ from tkinter import E, END, Frame,Label,Button,Entry,Listbox,W,Canvas
 
 # import threading
 # import time
-
+# def modificador_strings(cadena):
+#         cadena2 =cadena[0:]
+#         return cadena2
 
 class Comprador():
 #---------------------------metodos de la clase---------------------------#
@@ -121,7 +123,8 @@ class Comprador():
                 #---------------metodos de la clase ventana nueva------------#
                 # def vuelvo():
                 #         root2.destroy()
-                def mostrar():
+                def mostrar(riesgo2):
+                        print(riesgo2)
                         conn = psycopg2.connect(
                                 host ="ec2-23-23-182-238.compute-1.amazonaws.com",
                                 database="d8jkpbdn8n5tau",
@@ -129,12 +132,18 @@ class Comprador():
                                 password="e30184e8472a143402057f1b68c02afac1e0ffd8b3c504783772a6362b67fe3c",
                                 port="5432"
                                 )
+                        # riesgo_var= riesgo2
                         cursor = conn.cursor()
-                        query = '''SELECT * FROM tabla_contador'''
+                        if riesgo2 =="bajo":
+                                query = '''SELECT * FROM tabla_contador WHERE riesgo= 'bajo' '''
+                        elif riesgo2 =="medio":
+                                query = '''SELECT * FROM tabla_contador WHERE riesgo= 'medio' '''
+                        else:
+                                query = '''SELECT * FROM tabla_contador WHERE riesgo= 'alto' '''
                         cursor.execute(query)
                         guardar = cursor.fetchall()
                         caja = Listbox(marco, width=20, height=5)
-                        caja.grid(row=1, columnspan=10,sticky=W+E)                   #el cloumnspan sirve para que le de espacio a los lados
+                        caja.grid(row=2, columnspan=10,sticky=W+E)                   #el cloumnspan sirve para que le de espacio a los lados
                         for elemento in guardar:
                                 caja.insert(END, elemento)
                         conn.commit()
@@ -148,12 +157,18 @@ class Comprador():
 #---------------------------creacion ventana---------------------------#
                 ventana_ppal3 =Label(marco,text="BIENVENIDO COMPRADOR",font=("Comic Sans MS",40),fg="GREEN")
                 ventana_ppal3.grid(row=0,column=1)
+                ventana_texto=Label(marco, text="¿qué nivel de riesgo está dispuesto a asumir?-->(bajo,medio,alto)")
+                ventana_texto.grid(row=1,column=0)
 #---------------------------creacion botones---------------------------#
                 boton1=Button(marco,text="¿quieres volver?",command= callback)
-                boton1.grid(row=2,column=0)
+                boton1.grid(row=3,column=0)
+                boton2 = Button(marco, text="buscar",command=lambda:mostrar(entrada1.get()))
+                boton2.grid(row=1,column=3)
 #---------------------------creacion entradas---------------------------#
+                entrada1= Entry(marco)
+                entrada1.grid(row=1,column=1)
 #por ahora lo dejo vacio porque no sé si lo voy a usar
-                mostrar()
+
                 #root.mainloop()
                 return marco
 #la idea de lo que he hecho es conectar el comprador a un frame que se conecta a su vez a un root indeterminado(se determina en la clase interfaz_grafica).Y, al final del metodo devolver dicho marco

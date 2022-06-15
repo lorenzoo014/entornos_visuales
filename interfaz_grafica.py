@@ -130,7 +130,14 @@ from Vendedor import Vendedor                #me importo la clase Vendedor del m
 import threading
 import time
 
+import random
+
 import psycopg2
+
+# def Nivel_Riesgo(nft):
+#     numero_aleatorio = random.randint(0,2)
+#     if numero_aleatorio==1:
+
 
 root1 =tk.Tk()
 root1.title("NFT´S")

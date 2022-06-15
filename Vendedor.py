@@ -106,7 +106,7 @@
 
 
 
-
+import random
 from msilib.schema import Font
 import tkinter as tk
 from tkinter import  Frame,Label,Button,Entry,Canvas,font,W,E
@@ -115,8 +115,22 @@ from tkinter import  Frame,Label,Button,Entry,Canvas,font,W,E
 
 # from venv import psycopg2
 import psycopg2                                                    #aparece en la seccion "problemas" que no se puede encontrar el modulo del cual se importa pero esto se produce porque el programa no puede tener en cuenta que
-#                                                                  #yo lo estoy ejecutando sobre el entorno virtual "env"(importado por mi) en el cual SÍ esta importado el módulo PSYCOPG2 por eso no hay luego fallos porque en ese entorno SÍ esta importado
-class Vendedor:
+#
+#                                                     #yo lo estoy ejecutando sobre el entorno virtual "env"(importado por mi) en el cual SÍ esta importado el módulo PSYCOPG2 por eso no hay luego fallos porque en ese entorno SÍ esta importado
+
+def Nivel_Riesgo(nft):
+        num = random.randint(1,3)
+        if num==1:
+                riesgo="bajo"
+                return riesgo
+        if num==2:
+                riesgo="medio"
+                return riesgo
+        else:
+                riesgo="alto"
+                return riesgo
+
+class Vendedor():
         def __init__(self):
                 pass
                 # print(contador)
@@ -127,8 +141,9 @@ class Vendedor:
                 #         # root3.destroy()                                                    # debido a  que es una funcion da igual utilizar objetos no creados(root) porque
                 #         # en el flujo de ejecucion ya estará creado
                 #         pass
+                nft=' '
 
-                def guarda_dato(nombre,apellido,nft):                                       #para que los vendedores coloquen sus anuncios
+                def guarda_dato(nombre,apellido,nft,riesgo=Nivel_Riesgo(nft)):                                       #para que los vendedores coloquen sus anuncios
                         # conn= psycopg2.connect(
                         #         host ="ec2-54-211-255-161.compute-1.amazonaws.com",
                         #         database="dfese1r3fhpnbb",
@@ -145,8 +160,8 @@ class Vendedor:
                                 )
                         cursor = conn.cursor()
                         # query = '''INSERT INTO users(nombre,apellido,nft) VALUES (&s,&s,&s)'''
-                        query = '''INSERT INTO tabla_contador(nombre,apellido,nft) VALUES (%s,%s,%s)'''
-                        cursor.execute(query,(nombre,apellido,nft))
+                        query = '''INSERT INTO tabla_contador(nombre,apellido,nft,riesgo) VALUES (%s,%s,%s,%s)'''
+                        cursor.execute(query,(nombre,apellido,nft,riesgo))
                         conn.commit()
                         conn.close()
                         #-------pequeña comprobacion de que la signatura y los parametros se enlazan correctamente----------#
@@ -187,6 +202,8 @@ class Vendedor:
 # ---------------------------creacion boton---------------------------#
                 boton1=Button(marco,text="¿quieres salir?",command= callback)
                 boton1.grid(row=5,column=1,sticky=W+E)
+
+                nft = entrada1.get()
 
                 boton2=Button(marco,text="poner en el mercado")
                 ''' ,command=lambda:guarda_dato(entrada1.get(),entrada2.get(),entrada3.get()))'''#esto se supone que iria arriba
