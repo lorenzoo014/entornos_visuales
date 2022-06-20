@@ -42,7 +42,7 @@
 #                                 port="5432"
 #                                 )
 #                         cursor = conn.cursor()
-#                         query = '''SELECT * FROM tabla_contador'''
+#                         query = '''SELECT * FROM tabla_ejemplo'''
 #                         cursor.execute(query)
 #                         guardar = cursor.fetchall()
 #                         caja = Listbox(marco, width=20, height=5)
@@ -137,13 +137,13 @@ class Comprador():
                         # riesgo_var= riesgo2
                         cursor = conn.cursor()
                         if riesgo2 =="bajo":
-                                query = '''SELECT * FROM tabla_contador WHERE riesgo= 'bajo' '''
+                                query = '''SELECT * FROM tabla_ejemplo WHERE riesgo= 'bajo' '''
                         elif riesgo2 =="medio":
-                                query = '''SELECT * FROM tabla_contador WHERE riesgo= 'medio' '''
+                                query = '''SELECT * FROM tabla_ejemplo WHERE riesgo= 'medio' '''
                         elif riesgo2 =="alto":
-                                query = '''SELECT * FROM tabla_contador WHERE riesgo= 'alto' '''
+                                query = '''SELECT * FROM tabla_ejemplo WHERE riesgo= 'alto' '''
                         else:
-                                query = '''SELECT * FROM tabla_contador '''
+                                query = '''SELECT * FROM tabla_ejemplo '''
                         cursor.execute(query)
                         guardar = cursor.fetchall()
                         caja = Listbox(marco, width=20, height=5)
@@ -154,29 +154,29 @@ class Comprador():
                         conn.close()
 
 
-                def comprar(id):
-                        conn = psycopg2.connect(
-                                host ="ec2-23-23-182-238.compute-1.amazonaws.com",
-                                database="d8jkpbdn8n5tau",
-                                user= "sfgectibhzlelp",
-                                password="e30184e8472a143402057f1b68c02afac1e0ffd8b3c504783772a6362b67fe3c",
-                                port="5432"
-                                )
-                        cursor = conn.cursor()
-                        # query = "SELECT * FROM tabla_contador WHERE id = ?"
-                        # variable = int(id)
-                        # cursor.execute(query, str(id))
+                # def comprar(id):
+                #         conn = psycopg2.connect(
+                #                 host ="ec2-23-23-182-238.compute-1.amazonaws.com",
+                #                 database="d8jkpbdn8n5tau",
+                #                 user= "sfgectibhzlelp",
+                #                 password="e30184e8472a143402057f1b68c02afac1e0ffd8b3c504783772a6362b67fe3c",
+                #                 port="5432"
+                #                 )
+                #         cursor = conn.cursor()
+                #         # query = "SELECT * FROM tabla_ejemplo WHERE id = ?"
+                #         # variable = int(id)
+                #         # cursor.execute(query, str(id))
 
-                        query2 = "DELETE FROM tabla_contador WHERE id = ?"
-                        cursor.execute(query2, str(id))
-                        # mostrar()
-                        ventana_emergente = Label(marco,text="Enhorabuena ha comprado el NFT numero"+str(id))
-                        ventana_emergente.grid(row=4,column=1)
+                #         query2 = "DELETE FROM tabla_ejemplo WHERE id = ?"
+                #         cursor.execute(query2, str(id))
+                #         # mostrar()
+                #         ventana_emergente = Label(marco,text="Enhorabuena ha comprado el NFT numero"+str(id))
+                #         ventana_emergente.grid(row=4,column=1)
 
 
 
-                        conn.commit()
-                        conn.close()
+                #         conn.commit()
+                #         conn.close()
                 # root2 = tk.Tk()                                            #tras estar mucho pensandolo e intentado que este metodo devolviese a la ventana original pero no he sido capaz de averiguar cómo
 
                 # root2.title("COMPRADOR")
@@ -195,7 +195,7 @@ class Comprador():
                 boton1.grid(row=5,column=0)
                 boton2 = Button(marco, text="buscar",command=lambda:mostrar(entrada1.get()))
                 boton2.grid(row=1,column=2)
-                boton3 = Button(marco,text="comprar", command=lambda:comprar(entrada_compra.get()))
+                boton3 = Button(marco,text="comprar")
                 boton3.grid(row=3,column=2)
 #---------------------------creacion entradas---------------------------#
                 entrada1= Entry(marco)
@@ -238,4 +238,12 @@ class Comprador():
                         #                 break
                         #         else:
                         #                 contador+=1
+
+                        # pegar luego aqui
+
+                        # , command=lambda:comprar(entrada_compra.get()
+
+
+
+
                         #                 objeto = cursor.fetchone()    -->util para buscar un onjeto determinado--> encontrada una forma mejor

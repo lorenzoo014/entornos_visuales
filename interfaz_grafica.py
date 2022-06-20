@@ -139,12 +139,7 @@ import psycopg2
 #     if numero_aleatorio==1:
 
 
-root1 =tk.Tk()
-root1.title("NFT´S")
-root1.minsize(height=1900,width=1900)
-root1.maxsize(height=1900,width=1900)
-global a                                           #me creo una variable global inicializada a 0 que luego será de uso en las funciones
-a=0
+
 #---------------------------funciones---------------------------#
 def mostrar_comprador():
     vendedor.pack_forget()
@@ -164,6 +159,13 @@ def mostrar_vendedor():
 #     # root1.destroy()
 # anaNueva2()    vendedor1 =Vendedor()
 #     vendedor1.Vent
+
+root1 =tk.Tk()
+root1.title("NFT´S")
+root1.minsize(height=1900,width=1900)
+root1.maxsize(height=1900,width=1900)
+global a                                           #me creo una variable global inicializada a 0 que luego será de uso en las funciones
+a=0
 
 def primeraPág():
     comprador.pack_forget()
@@ -197,17 +199,18 @@ conn = psycopg2.connect(
 cursor = conn.cursor()
 # query1= "SHOW TABLES"
 # cursor.execute(query1)
-query = '''CREATE TABLE IF NOT EXISTS tabla_contador (id SERIAL PRIMARY KEY, nombre TEXT,apellido TEXT,nft TEXT ,riesgo TEXT);'''
+query = '''CREATE TABLE IF NOT EXISTS tabla_ejemplo (id SERIAL PRIMARY KEY, nombre TEXT,apellido TEXT,nft TEXT ,riesgo TEXT);'''
 cursor.execute(query)
 conn.commit()
 conn.close()
 print("se ha creado el registro")
 
 #----------main(2)-----------#
-
 comprador = Comprador().VentanaNueva(root1, primeraPág)     #sirve para enganchar el frame devuelto por VentanaNueva al root |||IMPORTANTE--> poner en la signatura del metodo el metodo que empaqueta el primer frame porque es ahí donde se dirige el callback
 vendedor = Vendedor().VentanaNueva2(root1, primeraPág)       #lo mismo pero con el vendedor
+
 primeraPág()
+
 
 root1.mainloop()
 
