@@ -119,6 +119,7 @@ import psycopg2                                                    #aparece en l
 #                                                     #yo lo estoy ejecutando sobre el entorno virtual "env"(importado por mi) en el cual SÍ esta importado el módulo PSYCOPG2 por eso no hay luego fallos porque en ese entorno SÍ esta importado
 
 def Nivel_Riesgo(nft):
+        print(" ")
         num = random.randint(1,3)
         if num==1:
                 riesgo="bajo"

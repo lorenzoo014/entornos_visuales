@@ -120,6 +120,7 @@ from tkinter import E, END, Frame,Label,Button,Entry,Listbox,W,Canvas
 class Comprador():
 #---------------------------metodos de la clase---------------------------#
         def __init__(self):
+                print(" ")
                 pass
         def VentanaNueva(self, master,callback = None, args=(),kwargs={}):
                 #---------------metodos de la clase ventana nueva------------#

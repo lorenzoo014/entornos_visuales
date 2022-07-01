@@ -12,6 +12,7 @@ bitcoin_amount = float(input("¿cuanta cantidad de BTC posee?"))
 bitcoin_value_euros = int(input("introduzca el valor de mercado"))
 # 1) write a function to calculate bitcoin to euros
 def bitcoinToEuros( bitcoin_amount, bitcoin_value_euros):
+    print(" ")
     euros_value =  bitcoin_amount *  bitcoin_value_euros
     return euros_value
 

@@ -168,6 +168,7 @@ global a                                           #me creo una variable global 
 a=0
 
 def primeraPág():
+    print(" ")
     comprador.pack_forget()
     vendedor.pack_forget()
     main_frame.pack(fill="both",expand=True)
